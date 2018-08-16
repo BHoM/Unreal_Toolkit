@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BH.oM.VirtualReality;
 using BH.oM.CFD.Elements;
-using BH.oM.Geometry;
+using BH.oM.Acoustic;
 
 namespace BH.Engine.VirtualReality.Unreal
 {
@@ -15,7 +15,14 @@ namespace BH.Engine.VirtualReality.Unreal
         /**** Public Methods                            ****/
         /***************************************************/
 
-        public static Project Project( string name, int saveindex, int scale, string unit = "", List<Streamer> streamers = null, List<UnrealGeometry> geometry = null)
+        public static Project Project(  string name, 
+                                        int saveindex, 
+                                        int scale, 
+                                        string unit = "", 
+                                        List<Streamer> streamers = null, 
+                                        List<UnrealGeometry> geometry = null, 
+                                        List<Receiver> receivers = null)
+
         {
             return new Project
             {
@@ -25,6 +32,7 @@ namespace BH.Engine.VirtualReality.Unreal
                 Name = name,
                 Scale = scale.ToString(),
                 Unit = unit,
+                Receivers = receivers,
             };
         }
 

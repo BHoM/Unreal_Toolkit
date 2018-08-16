@@ -11,6 +11,7 @@ using BH.oM.CFD.Elements;
 using BH.oM.VirtualReality;
 using BH.oM.Geometry;
 using BH.Engine.Geometry;
+using BH.oM.Acoustic;
 
 namespace BH.Engine.Unreal
 {
@@ -28,6 +29,11 @@ namespace BH.Engine.Unreal
             if (project.Streamers.Count() > 0)
             {
                 messages.Add(WrapStreamers(project.Streamers));
+            }
+
+            if (project.Receivers.Count() > 0)
+            {
+                messages.Add(WrapReceivers(project.Receivers));
             }
 
             string final = WrapVRProject(messages, project);
@@ -99,8 +105,7 @@ namespace BH.Engine.Unreal
             return true; //Success!
         }
 
-
-
+        /*************************************/
 
         private static string WrapMesh(List<UnrealGeometry> UnrealGeometries)
         {
@@ -178,6 +183,8 @@ namespace BH.Engine.Unreal
             return json;
         }
 
+        /*************************************/
+
         private static string WrapStreamers(List<Streamer> Streamers)
         {
 
@@ -209,25 +216,71 @@ namespace BH.Engine.Unreal
 
             foreach (Streamer streamer in Streamers)
             {
-                if (streamer.Nodes[0].Result !=0)
+                json += "[";
+                foreach (Node node in streamer.Nodes)
                 {
-                    json += "[";
-                    foreach (Node node in streamer.Nodes)
+                    if (node.CustomData.Keys.Contains("Result"))
                     {
-                        json += "[" + node.Result.ToString() + "]" + ",";
+                        json += "[" + (double)node.CustomData["Result"] + "]" + ",";
                     }
-                    json = json.Trim(',') + "],";
+                    else
+                    {
+                        json += "[],";
+                    }
                 }
-                else
-                {
-                    json += "[[]],";
-                }
+                json = json.Trim(',') + "],";
             }
             json = json.Trim(',') + "]";
 
             return json;
         }
 
+        /*************************************/
+
+        private static string WrapReceivers(List<Receiver> Receivers)
+        {
+
+            //Add Message Type
+            string json = "[[[BHoMReceivers]]]";
+
+
+            //Create Receiver list
+            json += ",[[";
+            foreach (Receiver receiver in Receivers)
+            {
+                    json += "[" + Math.Round(receiver.Location.X * 100, 0) + "," + Math.Round(receiver.Location.Y * -100, 0) + "," + Math.Round(receiver.Location.Z * 100, 0) + "],";
+            }
+            json = json.Trim(',') + "]]";
+
+
+            //Add Result Message
+
+            json += ",[[";
+
+            foreach (Receiver receiver in Receivers)
+            {
+                
+                if (receiver.CustomData.Keys.Contains("Result"))
+                {
+                    json += "[";
+                    foreach (double value in (List<double>)receiver.CustomData["Result"])
+                    {
+                            json += value + ",";
+                    }
+                    json.Trim(',');
+                    json += "]" + ",";
+                }
+                else
+                {
+                    json += "[],";
+                }
+            }
+            json = json.Trim(',') + "]]";
+
+            return json;
+        }
+
+        /*************************************/
 
         private static string WrapVRProject(List<string> messages, Project project)
         {
