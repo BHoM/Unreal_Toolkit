@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using BH.oM.Base;
 using BH.oM.Geometry;
 using BH.oM.CFD.Elements;
+using BH.oM.Acoustic;
 
 namespace BH.oM.VirtualReality
 {
@@ -20,6 +21,8 @@ namespace BH.oM.VirtualReality
         public List<Streamer> Streamers { get; set; } = new List<Streamer>();
 
         public List<UnrealGeometry> Geometry { get; set; } = new List<UnrealGeometry>();
+
+        public List<Receiver> Receivers { get; set; } = new List<Receiver>();
 
         public string Scale { get; set; } = "";
 
