@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using BH.oM.Base;
 using BH.oM.Geometry;
-using BH.oM.CFD.Elements;
 using BH.oM.Acoustic;
 
 namespace BH.oM.VirtualReality
@@ -16,17 +15,23 @@ namespace BH.oM.VirtualReality
         /**** Properties                                ****/
         /***************************************************/
 
-        public string saveIndex { get; set; } = "";
+        public string SaveIndex { get; set; } = "";
 
-        public List<Streamer> Streamers { get; set; } = new List<Streamer>();
+        public List<UnrealSpline> Splines { get; set; } = new List<UnrealSpline>();
 
-        public List<UnrealGeometry> Geometry { get; set; } = new List<UnrealGeometry>();
+        public List<UnrealMesh> Meshes { get; set; } = new List<UnrealMesh>();
 
-        public List<Receiver> Receivers { get; set; } = new List<Receiver>();
+        public List<UnrealNode> Nodes { get; set; } = new List<UnrealNode>();
 
         public string Scale { get; set; } = "";
 
         public string Unit { get; set; } = "";
+
+        public bool AcousticMode { get; set; } = false;
+
+        public double ResultMax { get; set; } = 0;
+
+        public double ResultMin { get; set; } = 0;
 
         /***************************************************/
     }

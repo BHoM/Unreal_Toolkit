@@ -8,16 +8,16 @@ using BH.oM.Geometry;
 
 namespace BH.oM.VirtualReality
 {
-    public class UnrealGeometry : BHoMObject
+    public class UnrealNode : BHoMObject
     {
         /***************************************************/
         /**** Properties                                ****/
         /***************************************************/
 
-        public string color { get; set; } = "";
+        public Point Position { get; set; } = new Point();
 
-        public Mesh mesh { get; set; } = new Mesh();
-    
+        public List<double> Values { get; set; } = new List<double>();
+
         /***************************************************/
 
 

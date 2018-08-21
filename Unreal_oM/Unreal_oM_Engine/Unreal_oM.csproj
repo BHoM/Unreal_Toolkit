@@ -34,9 +34,6 @@
       <HintPath>..\..\..\BHoM\Build\BHoM.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="CSV_oM">
-      <HintPath>..\..\..\CSV_Toolkit\Build\CSV_oM.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -47,7 +44,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UnrealObjects\UnrealGeometry.cs" />
+    <Compile Include="UnrealObjects\UnrealNode.cs" />
+    <Compile Include="UnrealObjects\UnrealSpline.cs" />
+    <Compile Include="UnrealObjects\UnrealMesh.cs" />
     <Compile Include="UnrealObjects\Project.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

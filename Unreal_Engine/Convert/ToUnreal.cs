@@ -7,7 +7,6 @@ using System.Net;
 using SS = System.Net.Sockets;
 using System.Threading;
 using BH.oM.Base;
-using BH.oM.CFD.Elements;
 using BH.oM.VirtualReality;
 using BH.oM.Geometry;
 using BH.Engine.Geometry;
@@ -21,19 +20,19 @@ namespace BH.Engine.Unreal
         {
             List<string> messages = new List<string>();
 
-            if (project.Geometry.Count() > 0)
+            if (project.Meshes.Count() > 0)
             {
-                messages.Add(WrapMesh(project.Geometry));
+                messages.Add(WrapMesh(project.Meshes));
             }
 
-            if (project.Streamers.Count() > 0)
+            if (project.Splines.Count() > 0)
             {
-                messages.Add(WrapStreamers(project.Streamers));
+                messages.Add(WrapSplines(project.Splines));
             }
 
-            if (project.Receivers.Count() > 0)
+            if (project.Nodes.Count() > 0)
             {
-                messages.Add(WrapReceivers(project.Receivers));
+                messages.Add(WrapNodes(project.Nodes));
             }
 
             string final = WrapVRProject(messages, project);
@@ -107,7 +106,7 @@ namespace BH.Engine.Unreal
 
         /*************************************/
 
-        private static string WrapMesh(List<UnrealGeometry> UnrealGeometries)
+        private static string WrapMesh(List<UnrealMesh> UnrealMeshes)
         {
 
             //Add Message Type
@@ -118,10 +117,10 @@ namespace BH.Engine.Unreal
             //Add Color Message
 
             json += ",[";
-            for (int i = 0; i < UnrealGeometries.Count; i++)
+            for (int i = 0; i < UnrealMeshes.Count; i++)
             {
 
-                List<string> colorStrings = UnrealGeometries[i].color.Split(new Char[] { ',' }, StringSplitOptions.None).ToList();
+                List<string> colorStrings = UnrealMeshes[i].Color.Split(new Char[] { ',' }, StringSplitOptions.None).ToList();
                 double colorScale = 1.00 / 255.00;
                 string ColorName = "[";
                 for (int j = 0; j < colorStrings.Count; j++)
@@ -139,13 +138,13 @@ namespace BH.Engine.Unreal
             //Add Mesh Message
 
             json += ",[";
-            for (int i = 0; i < UnrealGeometries.Count; i++)
+            for (int i = 0; i < UnrealMeshes.Count; i++)
             {
                 List<Vector> Normals = new List<Vector>();
                 json += "[[";
                 json += "{\"vertices\": [";
 
-                foreach (Point vertex in UnrealGeometries[i].mesh.Vertices)
+                foreach (Point vertex in UnrealMeshes[i].Mesh.Vertices)
                 {
                     json += "[" + (vertex.X * 100).ToString("0.0") + "," + (vertex.Y * -100).ToString("0.0") + "," + (vertex.Z * 100).ToString("0.0") + "],";
                     Normals.Add(new Vector());
@@ -155,13 +154,13 @@ namespace BH.Engine.Unreal
                 
 
                 
-                foreach (BH.oM.Geometry.Face face in UnrealGeometries[i].mesh.Faces)
+                foreach (BH.oM.Geometry.Face face in UnrealMeshes[i].Mesh.Faces)
                 {
                     //if (face.IsQuad)
                     //    json += face.A + "," + face.B + "," + face.C + "," + face.D + "," + face.B + "," + face.C + ",";
                     //else
                     json += face.C + "," + face.B + "," + face.A + ",";
-                    Vector faceNormal = Create.Plane(UnrealGeometries[i].mesh.Vertices[face.C], UnrealGeometries[i].mesh.Vertices[face.B], UnrealGeometries[i].mesh.Vertices[face.A]).Normal;
+                    Vector faceNormal = Create.Plane(UnrealMeshes[i].Mesh.Vertices[face.C], UnrealMeshes[i].Mesh.Vertices[face.B], UnrealMeshes[i].Mesh.Vertices[face.A]).Normal;
                     Normals[face.C] = Normals[face.C] + faceNormal;
                     Normals[face.B] = Normals[face.B] + faceNormal;
                     Normals[face.A] = Normals[face.A] + faceNormal;
@@ -185,97 +184,82 @@ namespace BH.Engine.Unreal
 
         /*************************************/
 
-        private static string WrapStreamers(List<Streamer> Streamers)
+        private static string WrapSplines(List<UnrealSpline> Splines)
         {
 
             //Add Message Type
+
             string json = "[[[BHoMSplines]]]";
 
-
-            //Add Material Message
-            json += ",[[[" + "null" + "]]]";
-
-
             //Create Polylinelist
-            json += ",[";
-            foreach (Streamer streamer in Streamers)
+
+            string splineString = ",[";
+            string valueString = ",[";
+            foreach (UnrealSpline spline in Splines)
             {
-                json += "[";
-                foreach (Node node in streamer.Nodes)
+                splineString += "[";
+                valueString += "[";
+
+                foreach (UnrealNode node in spline.Nodes)
                 {
-                    json += "[" + Math.Round(node.Position.X * 100, 0) + "," + Math.Round(node.Position.Y * -100, 0) + "," + Math.Round(node.Position.Z * 100, 0) + "],";
-                }
-                json = json.Trim(',') + "],";
-            }
-            json = json.Trim(',') + "]";
+                    
+                    splineString += "[" + Math.Round(node.Position.X * 100, 0) + "," + Math.Round(node.Position.Y * -100, 0) + "," + Math.Round(node.Position.Z * 100, 0) + "],";
 
-
-            //Add Result Message
-
-            json += ",[";
-
-            foreach (Streamer streamer in Streamers)
-            {
-                json += "[";
-                foreach (Node node in streamer.Nodes)
-                {
-                    if (node.CustomData.Keys.Contains("Result"))
+                    valueString += "[";
+                    foreach (double value in node.Values)
                     {
-                        json += "[" + (double)node.CustomData["Result"] + "]" + ",";
+                        valueString += value + ",";
+
                     }
-                    else
-                    {
-                        json += "[],";
-                    }
+                    valueString = valueString.TrimEnd(',') + "]" + ",";
+
                 }
-                json = json.Trim(',') + "],";
+
+                splineString = splineString.TrimEnd(',') + "],";
+                valueString = valueString.TrimEnd(',') + "],";
+
             }
-            json = json.Trim(',') + "]";
+
+            splineString = splineString.TrimEnd(',') + "]";
+            valueString = valueString.TrimEnd(',') + "]";
+
+            json += splineString + valueString ;
 
             return json;
         }
 
         /*************************************/
 
-        private static string WrapReceivers(List<Receiver> Receivers)
+        private static string WrapNodes(List<UnrealNode> Nodes)
         {
 
             //Add Message Type
-            string json = "[[[BHoMReceivers]]]";
+            string json = "[[[BHoMNodes]]]";
 
 
-            //Create Receiver list
-            json += ",[[";
-            foreach (Receiver receiver in Receivers)
+            //Create Node Message
+
+            string nodeString = ",[[";
+            string valueString = ",[[";
+
+            foreach (UnrealNode node in Nodes)
             {
-                    json += "[" + Math.Round(receiver.Location.X * 100, 0) + "," + Math.Round(receiver.Location.Y * -100, 0) + "," + Math.Round(receiver.Location.Z * 100, 0) + "],";
-            }
-            json = json.Trim(',') + "]]";
 
+                nodeString += "[" + Math.Round(node.Position.X * 100, 0) + "," + Math.Round(node.Position.Y * -100, 0) + "," + Math.Round(node.Position.Z * 100, 0) + "],";
 
-            //Add Result Message
-
-            json += ",[[";
-
-            foreach (Receiver receiver in Receivers)
-            {
-                
-                if (receiver.CustomData.Keys.Contains("Result"))
+                valueString += "[";
+                foreach (double value in node.Values)
                 {
-                    json += "[";
-                    foreach (double value in (List<double>)receiver.CustomData["Result"])
-                    {
-                            json += value + ",";
-                    }
-                    json.Trim(',');
-                    json += "]" + ",";
+                    valueString += value + ",";
                 }
-                else
-                {
-                    json += "[],";
-                }
+                valueString = valueString.TrimEnd(',') + "]" + ",";
+
             }
-            json = json.Trim(',') + "]]";
+
+            nodeString = nodeString.TrimEnd(',') + "]]";
+            valueString = valueString.TrimEnd(',') + "]]";
+
+            json += nodeString + valueString;
 
             return json;
         }
@@ -287,11 +271,15 @@ namespace BH.Engine.Unreal
 
             string json = "[[[[[" + project.Name + "]]]],";
 
-            json += "[[[[" + project.saveIndex + "]]]],";
+            json += "[[[[" + project.SaveIndex + "]]]],";
 
             json += "[[[[" + project.Scale + "]]]],";
 
             json += "[[[[" + project.Unit + "]]]],";
+
+            json += "[[[[" + project.AcousticMode + "]]]],";
+
+            json += "[[[[" + project.ResultMin + "," + project.ResultMax + "]]]],";
 
             for (int i = 0; i < messages.Count; i++)
             {
