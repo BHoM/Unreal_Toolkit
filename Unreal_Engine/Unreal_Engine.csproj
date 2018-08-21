@@ -34,9 +34,6 @@
       <HintPath>..\..\BHoM\Build\BHoM.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="CSV_oM">
-      <HintPath>..\..\CSV_Toolkit\Build\CSV_oM.dll</HintPath>
-    </Reference>
     <Reference Include="Geometry_Engine">
       <HintPath>..\..\BHoM_Engine\Build\Geometry_Engine.dll</HintPath>
     </Reference>
@@ -57,7 +54,9 @@
     <Compile Include="Convert\AdapterId.cs" />
     <Compile Include="Convert\ToBHoM.cs" />
     <Compile Include="Convert\ToUnreal.cs" />
-    <Compile Include="Create\UnrealGeometry.cs" />
+    <Compile Include="Create\UnrealNode.cs" />
+    <Compile Include="Create\UnrealSpline.cs" />
+    <Compile Include="Create\UnrealMesh.cs" />
     <Compile Include="Create\Project.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

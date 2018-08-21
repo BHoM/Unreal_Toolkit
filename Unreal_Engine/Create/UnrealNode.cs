@@ -14,12 +14,12 @@ namespace BH.Engine.VirtualReality
         /**** Public Methods                            ****/
         /***************************************************/
 
-        public static UnrealGeometry UnrealGeometry(Mesh Mesh, string Color)
+        public static UnrealNode UnrealNode(Point position, List<double> values)
         {
-            return new UnrealGeometry
+            return new UnrealNode
             {
-                mesh = Mesh,
-                color = Color,
+                Position = position,
+                Values = values,
             };
         }
 

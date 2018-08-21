@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BH.oM.VirtualReality;
-using BH.oM.CFD.Elements;
 using BH.oM.Acoustic;
 
 namespace BH.Engine.VirtualReality.Unreal
@@ -19,20 +18,27 @@ namespace BH.Engine.VirtualReality.Unreal
                                         int saveindex, 
                                         int scale, 
                                         string unit = "", 
-                                        List<Streamer> streamers = null, 
-                                        List<UnrealGeometry> geometry = null, 
-                                        List<Receiver> receivers = null)
+                                        bool acousticMode = false,
+                                        double resultMin = 0,
+                                        double resultMax = 0,
+                                        List<UnrealSpline> splines = null, 
+                                        List<UnrealMesh> meshes = null, 
+                                        List<UnrealNode> nodes = null)
 
         {
             return new Project
             {
-                Geometry = geometry,
-                Streamers = streamers,
-                saveIndex = saveindex.ToString(),
+                Meshes = meshes,
+                Splines = splines,
+                SaveIndex = saveindex.ToString(),
                 Name = name,
                 Scale = scale.ToString(),
                 Unit = unit,
-                Receivers = receivers,
+                Nodes = nodes,
+                AcousticMode = acousticMode,
+                ResultMax = resultMax,
+                ResultMin = resultMin,
+
             };
         }
 
