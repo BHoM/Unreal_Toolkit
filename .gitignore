@@ -6,8 +6,7 @@
 *.o
 *.so
 *.dll
-*.db
-*.bin
+*.pdb
 
 # Packages #
 ############
@@ -20,7 +19,6 @@
 *.jar
 *.rar
 *.tar
-*.zip
 
 # Logs and databases #
 ######################
@@ -52,9 +50,7 @@ bld/
 [Oo]bj/
 [Ll]og/
 [Bb]uild/
-[Ss]aved/
-[Bb]inaries/
-Intermediate/Build/
+[Pp]ackages/
 
 # Visual Studio User File #
 ###########################
