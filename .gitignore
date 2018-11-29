@@ -51,6 +51,8 @@ bld/
 [Ll]og/
 [Bb]uild/
 [Pp]ackages/
+Saved/
+Intermediate/
 
 # Visual Studio User File #
 ###########################
