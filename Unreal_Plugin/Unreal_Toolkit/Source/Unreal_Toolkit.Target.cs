@@ -5,21 +5,15 @@ using System.Collections.Generic;
 
 public class Unreal_ToolkitTarget : TargetRules
 {
-	public Unreal_ToolkitTarget(TargetInfo Target)
+	public Unreal_ToolkitTarget(TargetInfo Target) : base (Target)
 	{
 		Type = TargetType.Game;
+
+        ExtraModuleNames.Add("Unreal_Toolkit");
 	}
 
 	//
 	// TargetRules interface.
 	//
 
-	public override void SetupBinaries(
-		TargetInfo Target,
-		ref List<UEBuildBinaryConfiguration> OutBuildBinaryConfigurations,
-		ref List<string> OutExtraModuleNames
-		)
-	{
-		OutExtraModuleNames.AddRange( new string[] { "Unreal_Toolkit" } );
-	}
 }
