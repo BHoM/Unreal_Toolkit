@@ -5,9 +5,15 @@
 	"Description": "",
 	"Modules": [
 		{
-			"Name": "Unreal_Toolkit",
+			"Name": "UnrealPluginProject",
 			"Type": "Runtime",
 			"LoadingPhase": "Default"
+		}
+	],
+	"Plugins": [
+		{
+			"Name": "Unreal_Toolkit",
+			"Enabled": true
 		}
 	]
 }

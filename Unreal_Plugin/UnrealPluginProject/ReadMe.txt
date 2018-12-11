@@ -1,0 +1,1 @@
+Open project (.uproject file), plugin should build when project opns. Then copy Eel folder in Plugins to Engine Plugins folder.
