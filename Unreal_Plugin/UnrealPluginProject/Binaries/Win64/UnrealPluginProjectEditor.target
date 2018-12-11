@@ -1,5 +1,5 @@
 {
-	"TargetName": "Unreal_ToolkitEditor",
+	"TargetName": "UnrealPluginProjectEditor",
 	"Platform": "Win64",
 	"Configuration": "Development",
 	"Version": 
@@ -34,6 +34,18 @@
 			"Path": "$(EngineDir)/Binaries/Win64/UE4Editor-Cmd.pdb",
 			"Type": "SymbolFile",
 			"IsPrecompiled": true
+		},
+		{
+			"Path": "$(ProjectDir)/Plugins/Eel/BHoM/Binaries/Win64/UE4Editor-Unreal_Toolkit.dll",
+			"Type": "DynamicLibrary"
+		},
+		{
+			"Path": "$(ProjectDir)/Plugins/Eel/BHoM/Binaries/Win64/UE4Editor-Unreal_Toolkit.pdb",
+			"Type": "SymbolFile"
+		},
+		{
+			"Path": "$(ProjectDir)/Plugins/Eel/BHoM/Intermediate/Build/Win64/UE4Editor/Development/UE4Editor-Unreal_Toolkit.lib",
+			"Type": "ImportLibrary"
 		},
 		{
 			"Path": "$(EngineDir)/Plugins/2D/Paper2D/Binaries/Win64/UE4Editor-Paper2D.dll",
@@ -1251,15 +1263,15 @@
 			"IsPrecompiled": true
 		},
 		{
-			"Path": "$(ProjectDir)/Binaries/Win64/UE4Editor-Unreal_Toolkit.dll",
+			"Path": "$(ProjectDir)/Binaries/Win64/UE4Editor-UnrealPluginProject.dll",
 			"Type": "DynamicLibrary"
 		},
 		{
-			"Path": "$(ProjectDir)/Binaries/Win64/UE4Editor-Unreal_Toolkit.pdb",
+			"Path": "$(ProjectDir)/Binaries/Win64/UE4Editor-UnrealPluginProject.pdb",
 			"Type": "SymbolFile"
 		},
 		{
-			"Path": "$(ProjectDir)/Intermediate/Build/Win64/UE4Editor/Development/UE4Editor-Unreal_Toolkit.lib",
+			"Path": "$(ProjectDir)/Intermediate/Build/Win64/UE4Editor/Development/UE4Editor-UnrealPluginProject.lib",
 			"Type": "ImportLibrary"
 		},
 		{
@@ -5917,13 +5929,21 @@
 			"Type": "BuildResource"
 		},
 		{
+			"Path": "$(ProjectDir)/Plugins/Eel/BHoM/Binaries/Win64/UE4Editor.modules",
+			"Type": "RequiredResource"
+		},
+		{
 			"Path": "$(ProjectDir)/Binaries/Win64/UE4Editor.modules",
 			"Type": "RequiredResource"
 		}
 	],
 	"RuntimeDependencies": [
 		{
-			"Path": "$(ProjectDir)/Unreal_Toolkit.uproject",
+			"Path": "$(ProjectDir)/UnrealPluginProject.uproject",
+			"Type": "UFS"
+		},
+		{
+			"Path": "$(ProjectDir)/Plugins/Eel/BHoM/Unreal_Toolkit.uplugin",
 			"Type": "UFS"
 		},
 		{

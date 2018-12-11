@@ -12,6 +12,7 @@
 	"SupportURL" : "",
 	"EnabledByDefault" : true,
 	"CanContainContent" : true,
+	"Installed" : true,
 	"Modules" :
 	[
 		{
