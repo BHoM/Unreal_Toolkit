@@ -30,9 +30,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Acoustic_oM">
+      <HintPath>..\..\..\BHoM\Build\Acoustic_oM.dll</HintPath>
+    </Reference>
     <Reference Include="BHoM">
       <HintPath>..\..\..\BHoM\Build\BHoM.dll</HintPath>
       <Private>False</Private>
+    </Reference>
+    <Reference Include="Geometry_oM">
+      <HintPath>..\..\..\BHoM\Build\Geometry_oM.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
