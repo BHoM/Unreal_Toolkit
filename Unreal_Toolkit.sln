@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unreal_Adapter", "Unreal_Adapter\Unreal_Adapter.csproj", "{E439A03A-0265-48FF-B6B2-AA41A14632D2}"
+	ProjectSection(ProjectDependencies) = postProject
+		{71F13F84-6DD2-429D-A3B4-51F50DC344BF} = {71F13F84-6DD2-429D-A3B4-51F50DC344BF}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unreal_Engine", "Unreal_Engine\Unreal_Engine.csproj", "{71F13F84-6DD2-429D-A3B4-51F50DC344BF}"
 EndProject
