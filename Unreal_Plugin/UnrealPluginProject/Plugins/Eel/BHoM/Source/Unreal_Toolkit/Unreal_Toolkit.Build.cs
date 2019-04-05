@@ -20,8 +20,6 @@
  * along with this code. If not, see <https://www.gnu.org/licenses/lgpl-3.0.html>.      
  */
 
-// Fill out your copyright notice in the Description page of Project Settings.
-
 using UnrealBuildTool;
 
 public class Unreal_Toolkit : ModuleRules
