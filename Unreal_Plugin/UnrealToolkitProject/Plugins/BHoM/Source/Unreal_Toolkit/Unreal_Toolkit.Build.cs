@@ -20,21 +20,26 @@
  * along with this code. If not, see <https://www.gnu.org/licenses/lgpl-3.0.html>.      
  */
 
-#pragma once
+using UnrealBuildTool;
 
-#include "CoreMinimal.h"
-#include "GameFramework/GameModeBase.h"
-#include "UnrealPluginProjectGameModeBase.generated.h"
-
-/**
- * 
- */
-UCLASS()
-class UNREALPLUGINPROJECT_API AUnrealPluginProjectGameModeBase : public AGameModeBase
+public class Unreal_Toolkit : ModuleRules
 {
-	GENERATED_BODY()
-	
-	
-	
-	
-};
+	public Unreal_Toolkit(ReadOnlyTargetRules Target) : base (Target)
+	{
+		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore" });
+
+		PrivateDependencyModuleNames.AddRange(new string[] {  });
+
+        PublicIncludePaths.AddRange(new string[] { "Unreal_Toolkit/Public" });
+
+        PrivateIncludePaths.AddRange(new string[] { "Unreal_Toolkit/Private" });
+
+        // Uncomment if you are using Slate UI
+        // PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });
+
+        // Uncomment if you are using online features
+        // PrivateDependencyModuleNames.Add("OnlineSubsystem");
+
+        // To include OnlineSubsystemSteam, add it to the plugins section in your uproject file with the Enabled attribute set to true
+    }
+}

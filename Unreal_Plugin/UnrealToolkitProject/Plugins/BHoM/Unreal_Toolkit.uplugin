@@ -1,7 +1,7 @@
 {
-	"FileVersion" : 1,
-	"Version" : 1,
-	"VersionName" : "1.0",
+	"FileVersion" : 2,
+	"Version" : 2,
+	"VersionName" : "2.0",
 	"FriendlyName" : "Unreal_Toolkit",
 	"Description" : "BHoM toolkit for Unreal",
 	"Category" : "BHoM",
