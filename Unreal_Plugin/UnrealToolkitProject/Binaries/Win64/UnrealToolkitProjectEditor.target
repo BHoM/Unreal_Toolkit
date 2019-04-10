@@ -1,5 +1,5 @@
 {
-	"TargetName": "UnrealPluginProjectEditor",
+	"TargetName": "UnrealToolkitProjectEditor",
 	"Platform": "Win64",
 	"Configuration": "Development",
 	"Version": 
@@ -36,15 +36,15 @@
 			"IsPrecompiled": true
 		},
 		{
-			"Path": "$(ProjectDir)/Plugins/Eel/BHoM/Binaries/Win64/UE4Editor-Unreal_Toolkit.dll",
+			"Path": "$(ProjectDir)/Plugins/BHoM/Binaries/Win64/UE4Editor-Unreal_Toolkit.dll",
 			"Type": "DynamicLibrary"
 		},
 		{
-			"Path": "$(ProjectDir)/Plugins/Eel/BHoM/Binaries/Win64/UE4Editor-Unreal_Toolkit.pdb",
+			"Path": "$(ProjectDir)/Plugins/BHoM/Binaries/Win64/UE4Editor-Unreal_Toolkit.pdb",
 			"Type": "SymbolFile"
 		},
 		{
-			"Path": "$(ProjectDir)/Plugins/Eel/BHoM/Intermediate/Build/Win64/UE4Editor/Development/UE4Editor-Unreal_Toolkit.lib",
+			"Path": "$(ProjectDir)/Plugins/BHoM/Intermediate/Build/Win64/UE4Editor/Development/UE4Editor-Unreal_Toolkit.lib",
 			"Type": "ImportLibrary"
 		},
 		{
@@ -1263,15 +1263,15 @@
 			"IsPrecompiled": true
 		},
 		{
-			"Path": "$(ProjectDir)/Binaries/Win64/UE4Editor-UnrealPluginProject.dll",
+			"Path": "$(ProjectDir)/Binaries/Win64/UE4Editor-UnrealToolkitProject.dll",
 			"Type": "DynamicLibrary"
 		},
 		{
-			"Path": "$(ProjectDir)/Binaries/Win64/UE4Editor-UnrealPluginProject.pdb",
+			"Path": "$(ProjectDir)/Binaries/Win64/UE4Editor-UnrealToolkitProject.pdb",
 			"Type": "SymbolFile"
 		},
 		{
-			"Path": "$(ProjectDir)/Intermediate/Build/Win64/UE4Editor/Development/UE4Editor-UnrealPluginProject.lib",
+			"Path": "$(ProjectDir)/Intermediate/Build/Win64/UE4Editor/Development/UE4Editor-UnrealToolkitProject.lib",
 			"Type": "ImportLibrary"
 		},
 		{
@@ -5929,7 +5929,7 @@
 			"Type": "BuildResource"
 		},
 		{
-			"Path": "$(ProjectDir)/Plugins/Eel/BHoM/Binaries/Win64/UE4Editor.modules",
+			"Path": "$(ProjectDir)/Plugins/BHoM/Binaries/Win64/UE4Editor.modules",
 			"Type": "RequiredResource"
 		},
 		{
@@ -5939,11 +5939,11 @@
 	],
 	"RuntimeDependencies": [
 		{
-			"Path": "$(ProjectDir)/UnrealPluginProject.uproject",
+			"Path": "$(ProjectDir)/UnrealToolkitProject.uproject",
 			"Type": "UFS"
 		},
 		{
-			"Path": "$(ProjectDir)/Plugins/Eel/BHoM/Unreal_Toolkit.uplugin",
+			"Path": "$(ProjectDir)/Plugins/BHoM/Unreal_Toolkit.uplugin",
 			"Type": "UFS"
 		},
 		{

@@ -5,7 +5,7 @@
 	"Description": "",
 	"Modules": [
 		{
-			"Name": "UnrealPluginProject",
+			"Name": "UnrealToolkitProject",
 			"Type": "Runtime",
 			"LoadingPhase": "Default"
 		}
