@@ -1,1 +1,1 @@
-Open project (.uproject file), plugin should build when project opns. Then copy Eel folder in Plugins to Engine Plugins folder.
+Open project (.uproject file), plugin should build when project opens. Then copy BHoM folder in Plugins to Engine Plugins folder (for use as an Engine Plugin) or to the Plugins foleder in your Unreal project (for use as a project plugin, recommended)
