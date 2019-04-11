@@ -18,7 +18,7 @@ You will need the following to build BHoM:
 
 
 ### Clone and build the Core BHoM Repos
-More specific instructions on this can be found on the [Unreal_Toolkit wiki](https://github.com/BuroHappoldEngineering/Unreal_Toolkit/wiki/Unreal_Toolkit-wiki).
+More specific instructions on this can be found on the [Unreal_Toolkit wiki](https://github.com/BHoM/Unreal_Toolkit/wiki/Unreal_Toolkit-wiki).
 
 
 
