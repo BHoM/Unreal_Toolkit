@@ -181,7 +181,7 @@ namespace BH.Engine.Unreal
                     //if (face.IsQuad)
                     //    json += face.A + "," + face.B + "," + face.C + "," + face.D + "," + face.B + "," + face.C + ",";
                     //else
-                    json += face.C + "," + face.B + "," + face.A + ",";
+                    json += "[" + face.C + "," + face.B + "," + face.A + "],";
                     Vector faceNormal = Create.Plane(UnrealMeshes[i].Mesh.Vertices[face.C], UnrealMeshes[i].Mesh.Vertices[face.B], UnrealMeshes[i].Mesh.Vertices[face.A]).Normal;
                     Normals[face.C] = Normals[face.C] + faceNormal;
                     Normals[face.B] = Normals[face.B] + faceNormal;
