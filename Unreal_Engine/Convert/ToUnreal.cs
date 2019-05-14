@@ -136,34 +136,13 @@ namespace BH.Engine.Unreal
             string json = "[[[BHoMMeshes]]]";
 
 
-            //Add Color Message
-
-            json += ",[";
-            for (int i = 0; i < UnrealMeshes.Count; i++)
-            {
-
-                List<string> colorStrings = UnrealMeshes[i].Color.Split(new Char[] { ',' }, StringSplitOptions.None).ToList();
-                double colorScale = 1.00 / 255.00;
-                string ColorName = "[";
-                for (int j = 0; j < colorStrings.Count; j++)
-                {
-                    double colorValue = Math.Round(colorScale * double.Parse(colorStrings[j]), 3);
-                    ColorName += colorValue + ",";
-                }
-                ColorName = ColorName.Trim(',') + "]";
-
-                json += "[" + ColorName + "],";
-            }
-            json = json.Trim(',') + "]";
-
-
             //Add Mesh Message
 
             json += ",[";
             for (int i = 0; i < UnrealMeshes.Count; i++)
             {
                 List<Vector> Normals = new List<Vector>();
-                json += "[[";
+                json += "[mesh]],[[";
                 json += "{\"vertices\": [";
 
                 foreach (Point vertex in UnrealMeshes[i].Mesh.Vertices)
@@ -171,10 +150,7 @@ namespace BH.Engine.Unreal
                     json += "[" + (vertex.X * 100).ToString("0.0") + "," + (vertex.Y * -100).ToString("0.0") + "," + (vertex.Z * 100).ToString("0.0") + "],";
                     Normals.Add(new Vector());
                 }
-                json = json.Trim(',') + "], \"faces\": [";
-
-                
-
+                json = json.Trim(',') + "], \"faces\": [";               
                 
                 foreach (BH.oM.Geometry.Face face in UnrealMeshes[i].Mesh.Faces)
                 {
@@ -196,8 +172,25 @@ namespace BH.Engine.Unreal
                     json += "[" + unitnormal.X.ToString("0.0") + "," + unitnormal.Y.ToString("0.0") + "," + unitnormal.Z.ToString("0.0") + "],";
                 }
 
+
+                //Add Color Message
+
+                json = json.Trim(',') + "], \"color\": [";
+                List<string> colorStrings = UnrealMeshes[i].Color.Split(new Char[] { ',' }, StringSplitOptions.None).ToList();
+                double colorScale = 1.00 / 255.00;
+                string ColorName = "[";
+                for (int j = 0; j < colorStrings.Count; j++)
+                {
+                    double colorValue = Math.Round(colorScale * double.Parse(colorStrings[j]), 3);
+                    ColorName += colorValue + ",";
+                }
+                ColorName = ColorName.Trim(',') + "]";
+
+                json += "[" + ColorName + "],";
+
                 json = json.Trim(',') + "]}";
                 json += "]],";
+
             }
             json = json.Trim(',') + "]";
 
