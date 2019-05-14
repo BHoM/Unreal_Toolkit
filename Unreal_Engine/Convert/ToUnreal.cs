@@ -138,11 +138,11 @@ namespace BH.Engine.Unreal
 
             //Add Mesh Message
 
-            json += ",[";
+            json += ",";
             for (int i = 0; i < UnrealMeshes.Count; i++)
             {
                 List<Vector> Normals = new List<Vector>();
-                json += "[mesh]],[[";
+                json += "[[mesh]],[[";
                 json += "{\"vertices\": [";
 
                 foreach (Point vertex in UnrealMeshes[i].Mesh.Vertices)
@@ -186,7 +186,7 @@ namespace BH.Engine.Unreal
                 }
                 ColorName = ColorName.Trim(',') + "]";
 
-                json += "[" + ColorName + "],";
+                json += ColorName;
 
                 json = json.Trim(',') + "]}";
                 json += "]],";
