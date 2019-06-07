@@ -25,25 +25,46 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BH.oM.Base;
+using BH.oM.VirtualReality;
 using BH.oM.Geometry;
 using BH.oM.Graphics.MaterialFragments;
-using BH.oM;
 
-namespace BH.oM.VirtualReality
+namespace BH.Engine.Graphics
 {
-    public class UnrealMesh : BHoMObject
+    public static partial class Create
     {
         /***************************************************/
-        /**** Properties                                ****/
+        /**** Public Methods                            ****/
         /***************************************************/
 
-        public RenderMaterial RenderMaterial { get; set; } = new RenderMaterial();
+        public static RenderMaterial RenderMaterial(Color baseColor = null, double opacity = 1, double glossiness = 0, Color emissiveColor = null, double emissivity = 0)
+        {
+            baseColor = (baseColor == null) ? new Color() : baseColor;
+            emissiveColor = (emissiveColor == null) ? new Color() : emissiveColor;
 
-        public Mesh Mesh { get; set; } = new Mesh();
+
+            return new RenderMaterial
+            {
+                BaseColor = baseColor,
+                Opacity = opacity,
+                Glossiness = glossiness,
+                EmissiveColor = emissiveColor,
+                Emissivity = emissivity
+            };
+        }
 
         /***************************************************/
 
+        public static Color Color(double r = 1, double g = 1, double b = 1)
+        {
+            return new Color
+            {
+                R = r,
+                G = g,
+                B = b
+            };
+        }
 
+        /***************************************************/
     }
 }

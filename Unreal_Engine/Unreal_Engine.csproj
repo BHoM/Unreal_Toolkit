@@ -62,6 +62,7 @@
     <Compile Include="Convert\ToBHoM.cs" />
     <Compile Include="Convert\ToUnreal.cs" />
     <Compile Include="Create\UnrealNode.cs" />
+    <Compile Include="Create\RenderMaterial.cs" />
     <Compile Include="Create\UnrealSpline.cs" />
     <Compile Include="Create\UnrealMesh.cs" />
     <Compile Include="Create\Project.cs" />

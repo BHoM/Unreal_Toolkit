@@ -27,8 +27,9 @@ using System.Text;
 using System.Threading.Tasks;
 using BH.oM.VirtualReality;
 using BH.oM.Geometry;
+using BH.oM.Graphics.MaterialFragments;
 
-namespace BH.Engine.VirtualReality
+namespace BH.Engine.Graphics.MaterialFragments
 {
     public static partial class Create
     {
@@ -36,12 +37,12 @@ namespace BH.Engine.VirtualReality
         /**** Public Methods                            ****/
         /***************************************************/
 
-        public static UnrealMesh UnrealMesh(Mesh mesh, string color)
+        public static UnrealMesh UnrealMesh(Mesh mesh, RenderMaterial renderMaterial)
         {
             return new UnrealMesh
             {
                 Mesh = mesh,
-                Color = color,
+                RenderMaterial = renderMaterial,
             };
         }
 
