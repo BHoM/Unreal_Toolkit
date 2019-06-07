@@ -33,6 +33,7 @@ using BH.oM.VirtualReality;
 using BH.oM.Geometry;
 using BH.Engine.Geometry;
 using BH.oM.Acoustic;
+using BH.oM.Graphics.MaterialFragments;
 
 namespace BH.Engine.Unreal
 {
@@ -158,7 +159,7 @@ namespace BH.Engine.Unreal
                     //    json += face.A + "," + face.B + "," + face.C + "," + face.D + "," + face.B + "," + face.C + ",";
                     //else
                     json += "[" + face.C + "," + face.B + "," + face.A + "],";
-                    Vector faceNormal = Create.Plane(UnrealMeshes[i].Mesh.Vertices[face.C], UnrealMeshes[i].Mesh.Vertices[face.B], UnrealMeshes[i].Mesh.Vertices[face.A]).Normal;
+                    Vector faceNormal = BH.Engine.Geometry.Create.Plane(UnrealMeshes[i].Mesh.Vertices[face.C], UnrealMeshes[i].Mesh.Vertices[face.B], UnrealMeshes[i].Mesh.Vertices[face.A]).Normal;
                     Normals[face.C] = Normals[face.C] + faceNormal;
                     Normals[face.B] = Normals[face.B] + faceNormal;
                     Normals[face.A] = Normals[face.A] + faceNormal;
@@ -173,20 +174,19 @@ namespace BH.Engine.Unreal
                 }
 
 
-                //Add Color Message
+                //Add Material Message
 
-                json = json.Trim(',') + "], \"color\": [";
-                List<string> colorStrings = UnrealMeshes[i].Color.Split(new Char[] { ',' }, StringSplitOptions.None).ToList();
-                double colorScale = 1.00 / 255.00;
-                string ColorName = "[";
-                for (int j = 0; j < colorStrings.Count; j++)
-                {
-                    double colorValue = Math.Round(colorScale * double.Parse(colorStrings[j]), 3);
-                    ColorName += colorValue + ",";
-                }
-                ColorName = ColorName.Trim(',') + "]";
+                json = json.Trim(',') + "], \"material\": [";
+                RenderMaterial meshMaterial = UnrealMeshes[i].RenderMaterial;
 
-                json += ColorName;
+                string materialString = "[";
+                materialString += meshMaterial.BaseColor.R.ToString() + ", " + meshMaterial.BaseColor.G.ToString() + ", " + meshMaterial.BaseColor.B.ToString();
+                materialString += ", " + meshMaterial.Opacity.ToString() + ", " + meshMaterial.Glossiness.ToString();
+                materialString += ", " + meshMaterial.EmissiveColor.R.ToString() + ", " + meshMaterial.EmissiveColor.G.ToString() + ", " + meshMaterial.EmissiveColor.B.ToString() + ", " + meshMaterial.Emissivity.ToString();
+
+                materialString += "]";
+
+                json += materialString;
 
                 json = json.Trim(',') + "]}";
                 json += "]],";

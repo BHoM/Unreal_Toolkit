@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="UnrealObjects\RenderMaterial.cs" />
     <Compile Include="UnrealObjects\UnrealNode.cs" />
     <Compile Include="UnrealObjects\UnrealSpline.cs" />
     <Compile Include="UnrealObjects\UnrealMesh.cs" />
