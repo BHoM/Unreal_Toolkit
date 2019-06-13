@@ -181,9 +181,9 @@ namespace BH.Engine.Unreal
                 RenderMaterial meshMaterial = UnrealMeshes[i].RenderMaterial;
 
                 string materialString = "[";
-                materialString += meshMaterial.BaseColor.R.ToString() + ", " + meshMaterial.BaseColor.G.ToString() + ", " + meshMaterial.BaseColor.B.ToString();
+                materialString += (meshMaterial.BaseColor.R/255).ToString() + ", " + (meshMaterial.BaseColor.G / 255).ToString() + ", " + (meshMaterial.BaseColor.B / 255).ToString();
                 materialString += ", " + meshMaterial.Opacity.ToString() + ", " + meshMaterial.Glossiness.ToString();
-                materialString += ", " + meshMaterial.EmissiveColor.R.ToString() + ", " + meshMaterial.EmissiveColor.G.ToString() + ", " + meshMaterial.EmissiveColor.B.ToString() + ", " + meshMaterial.Emissivity.ToString();
+                materialString += ", " + (meshMaterial.EmissiveColor.R/255).ToString() + ", " + (meshMaterial.EmissiveColor.G / 255).ToString() + ", " + (meshMaterial.EmissiveColor.B / 255).ToString() + ", " + meshMaterial.Emissivity.ToString();
 
                 materialString += "]";
 
