@@ -22,6 +22,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,11 +38,8 @@ namespace BH.Engine.Graphics
         /**** Public Methods                            ****/
         /***************************************************/
 
-        public static RenderMaterial RenderMaterial(Color baseColor = null, double opacity = 1, double glossiness = 0, Color emissiveColor = null, double emissivity = 0)
+        public static RenderMaterial RenderMaterial(Color baseColor = new Color(), double opacity = 1, double glossiness = 0, Color emissiveColor = new Color(), double emissivity = 0)
         {
-            baseColor = (baseColor == null) ? new Color() : baseColor;
-            emissiveColor = (emissiveColor == null) ? new Color() : emissiveColor;
-
 
             return new RenderMaterial
             {
@@ -55,16 +53,5 @@ namespace BH.Engine.Graphics
 
         /***************************************************/
 
-        public static Color Color(double r = 1, double g = 1, double b = 1)
-        {
-            return new Color
-            {
-                R = r,
-                G = g,
-                B = b
-            };
-        }
-
-        /***************************************************/
     }
 }
