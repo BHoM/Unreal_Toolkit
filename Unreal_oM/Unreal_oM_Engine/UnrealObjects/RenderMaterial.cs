@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing;
 using BH.oM.Base;
 
 namespace BH.oM.Graphics.MaterialFragments
@@ -16,10 +17,4 @@ namespace BH.oM.Graphics.MaterialFragments
         public double Emissivity { get; set; } = 0;
     }
 
-    public class Color : BHoMObject
-    {
-        public double R { get; set; } = 1;
-        public double G { get; set; } = 1;
-        public double B { get; set; } = 1;
-    }
 }

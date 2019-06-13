@@ -34,6 +34,7 @@ using BH.oM.Geometry;
 using BH.Engine.Geometry;
 using BH.oM.Acoustic;
 using BH.oM.Graphics.MaterialFragments;
+using System.Drawing;
 
 namespace BH.Engine.Unreal
 {
@@ -146,7 +147,7 @@ namespace BH.Engine.Unreal
                 json += "[[mesh]],[[";
                 json += "{\"vertices\": [";
 
-                foreach (Point vertex in UnrealMeshes[i].Mesh.Vertices)
+                foreach (BH.oM.Geometry.Point vertex in UnrealMeshes[i].Mesh.Vertices)
                 {
                     json += "[" + (vertex.X * 100).ToString("0.0") + "," + (vertex.Y * -100).ToString("0.0") + "," + (vertex.Z * 100).ToString("0.0") + "],";
                     Normals.Add(new Vector());
