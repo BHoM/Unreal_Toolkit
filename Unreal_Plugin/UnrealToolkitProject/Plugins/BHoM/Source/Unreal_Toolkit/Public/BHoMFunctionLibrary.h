@@ -22,6 +22,7 @@
 
 #pragma once
 
+#include "pugixml.hpp"
 #include "Kismet/BlueprintFunctionLibrary.h"
 #include "BHoMFunctionLibrary.generated.h"
 
@@ -46,5 +47,16 @@ public:
 
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "BHoM.JSON")
 		static void JsonToFloats(FString json, TArray<float>& items);
+
+
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "BHoM.JSON")
+		static void BHoMProjectSettings(FString json, FString& SaveIndex, FString& Scale, FString& Unit, FString& ResultMax, FString& ResultMin);
+
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "BHoM.JSON")
+		static void BHoMProjectSettings(FString json, FString& SaveIndex, FString& Scale, FString& Unit, FString& ResultMax, FString& ResultMin);
+
+
+	//UFUNCTION(BlueprintCallable, BlueprintPure, Category = "BHoM.JSON")
+	//	static void BHoMProjectSettings1_works(FString json, TArray<FString>& saveIndex);
 
 };

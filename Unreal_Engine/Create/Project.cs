@@ -36,15 +36,15 @@ namespace BH.Engine.VirtualReality.Unreal
         /**** Public Methods                            ****/
         /***************************************************/
 
-        public static Project Project(  string name, 
-                                        int saveindex, 
-                                        int scale, 
-                                        string unit = "", 
+        public static Project Project(string name,
+                                        int saveindex,
+                                        int scale,
+                                        string unit = "",
                                         bool acousticMode = false,
                                         double resultMin = 0,
                                         double resultMax = 0,
-                                        List<UnrealSpline> splines = null, 
-                                        List<UnrealMesh> meshes = null, 
+                                        List<UnrealSpline> splines = null,
+                                        List<UnrealMesh> meshes = null,
                                         List<UnrealNode> nodes = null)
 
         {

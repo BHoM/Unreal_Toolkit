@@ -27,6 +27,8 @@ using System.Text;
 using System.Threading.Tasks;
 using BH.Adapter;
 using BH.Engine.Unreal;
+using BH.oM.Base;
+using BH.oM.VirtualReality;
 
 namespace BH.Adapter.Unreal
 {
@@ -51,6 +53,11 @@ namespace BH.Adapter.Unreal
             m_address = address;
             m_port = port;
 
+        }
+
+        public override List<IObject> Push(IEnumerable<IObject> objects, string tag = "", Dictionary<string, object> config = null)
+        {
+            return Create(objects) ? objects.ToList() : new List<IObject>();
         }
 
 

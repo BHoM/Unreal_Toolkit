@@ -22,8 +22,8 @@
 
 #pragma once
 
-#include "Unreal_Toolkit.h"
 #include "BHoMFunctionLibrary.h"
+#include "Unreal_Toolkit.h"
 #include <list>
 
 
@@ -172,5 +172,36 @@ void UBHoMFunctionLibrary::JsonToFloats(FString json, TArray<float>& items)
 		items.Add(FCString::Atof(*stringArray[i]));
 }
 
+void UBHoMFunctionLibrary::BHoMProjectSettings(FString json, FString& SaveIndex, FString& Scale, FString& Unit, FString& ResultMax, FString& ResultMin)
+{
+	pugi::xml_document doc;
 
+	pugi::xml_parse_result result = doc.load_string(TCHAR_TO_ANSI(*json));
+
+	auto text = doc.child("UnrealProjectSettings").child("SaveIndex").text().as_string();
+	SaveIndex = ANSI_TO_TCHAR(text);
+
+	text = doc.child("UnrealProjectSettings").child("Scale").text().as_string();
+	Scale = ANSI_TO_TCHAR(text);
+
+	text = doc.child("UnrealProjectSettings").child("Unit").text().as_string();
+	Unit = ANSI_TO_TCHAR(text);
+
+	text = doc.child("UnrealProjectSettings").child("ResultMax").text().as_string();
+	Unit = ANSI_TO_TCHAR(text);
+
+	text = doc.child("UnrealProjectSettings").child("ResultMin").text().as_string();
+	Unit = ANSI_TO_TCHAR(text);
+}
+
+//void UBHoMFunctionLibrary::BHoMProjectSettings1_works(FString json, TArray<FString>& SaveIndex)
+//{
+//	pugi::xml_document doc;
+//
+//	pugi::xml_parse_result result = doc.load_string(TCHAR_TO_ANSI(*json));
+//
+//	auto text = doc.child("UnrealProjectSettings").child("SaveIndex").text().as_string();
+//
+//	saveIndex.Add(ANSI_TO_TCHAR(text));
+//}
 

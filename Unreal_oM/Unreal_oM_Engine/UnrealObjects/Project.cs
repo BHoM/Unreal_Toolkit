@@ -1,4 +1,4 @@
-/*
+﻿/*
  * This file is part of the Buildings and Habitats object Model (BHoM)
  * Copyright (c) 2015 - 2019, the respective contributors. All rights reserved.
  *
@@ -37,13 +37,13 @@ namespace BH.oM.VirtualReality
         /**** Properties                                ****/
         /***************************************************/
 
-        public string SaveIndex { get; set; } = "";
-
         public List<UnrealSpline> Splines { get; set; } = new List<UnrealSpline>();
 
         public List<UnrealMesh> Meshes { get; set; } = new List<UnrealMesh>();
 
         public List<UnrealNode> Nodes { get; set; } = new List<UnrealNode>();
+
+        public string SaveIndex { get; set; } = "";
 
         public string Scale { get; set; } = "";
 
@@ -56,5 +56,6 @@ namespace BH.oM.VirtualReality
         public double ResultMin { get; set; } = 0;
 
         /***************************************************/
+
     }
 }

@@ -20,15 +20,15 @@
  * along with this code. If not, see <https://www.gnu.org/licenses/lgpl-3.0.html>.      
  */
 
-#include "Unreal_Toolkit.h"
 #include "BHoMSocket.h"
+#include "Unreal_Toolkit.h"
 
 
 
 // Sets default values
 ABHoMSocket::ABHoMSocket()
 {
- 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
 
 	Port = 8888;

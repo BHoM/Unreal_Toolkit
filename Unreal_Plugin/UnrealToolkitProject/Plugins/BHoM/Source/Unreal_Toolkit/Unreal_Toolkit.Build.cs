@@ -34,6 +34,10 @@ public class Unreal_Toolkit : ModuleRules
 
         PrivateIncludePaths.AddRange(new string[] { "Unreal_Toolkit/Private" });
 
+        //PCHUsageMode = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;
+
+        PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
+
         // Uncomment if you are using Slate UI
         // PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });
 

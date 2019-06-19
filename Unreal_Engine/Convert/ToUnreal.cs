@@ -23,6 +23,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml.Serialization;
+using System.IO;
+using System.Xml;
 using System.Text;
 using System.Threading.Tasks;
 using System.Net;
@@ -40,97 +43,41 @@ namespace BH.Engine.Unreal
 {
     public static partial class Convert
     {
-        public static bool ToUnreal(string address, int port, Project project)
+        public static string ToUnreal(UnrealProjectSettings unrealPrjSettings)
+        {
+            return Serialize(unrealPrjSettings);
+        }
+
+        public static string ToUnreal(IEnumerable<UnrealMesh> unrealMeshes)
+        {
+            return Serialize(unrealMeshes);
+        }
+
+        public static string ToUnreal(IEnumerable<UnrealSpline> unrealSplines)
+        {
+            return Serialize(unrealSplines);
+        }
+
+        public static string ToUnreal(Project project)
         {
             List<string> messages = new List<string>();
 
             if (project.Meshes.Count() > 0)
-            {
-                messages.Add(WrapMesh(project.Meshes));
-            }
+                messages.Add(Wrap(project.Meshes));
 
             if (project.Splines.Count() > 0)
-            {
-                messages.Add(WrapSplines(project.Splines));
-            }
+                messages.Add(Wrap(project.Splines));
 
             if (project.Nodes.Count() > 0)
-            {
-                messages.Add(WrapNodes(project.Nodes));
-            }
+                messages.Add(Wrap(project.Nodes));
 
-            string final = WrapVRProject(messages, project);
-            return SendData(address, port, final);
-        }
-
-
-        private static bool SendData(string host, int destPort, string data)
-        {
-            IPAddress dest = Dns.GetHostAddresses(host)[0]; //Get the destination IP Address
-            IPEndPoint ePoint = new IPEndPoint(dest, destPort);
-            SS.Socket mySocket = new SS.Socket(SS.AddressFamily.InterNetwork, SS.SocketType.Dgram, SS.ProtocolType.Udp); //Create a socket using the same protocols as in the Javascript file (Dgram and Udp)
-
-            //byte[] outBuffer = Encoding.ASCII.GetBytes(data); //Convert the data to a byte array
-            //int nbBytes = mySocket.SendTo(outBuffer, ePoint); //Send the data to the socket
-
-            bool done = SendString(mySocket, ePoint, data);
-
-            mySocket.Close(); //Socket use over, time to close it
-
-            return done;
+            return Wrap(messages, project);
         }
 
 
         /*************************************/
-        /****  Private methods            ****/
-        /*************************************/
 
-        private static bool SendInt(SS.Socket mySocket, IPEndPoint ePoint, Int32 value)
-        {
-            value = IPAddress.HostToNetworkOrder(value); //Convert long from Host Byte Order to Network Byte Order
-            if (!SendAll(mySocket, ePoint, BitConverter.GetBytes(value))) //Try to send int... If int fails to send
-                return false; //Return false: int not successfully sent
-            return true; //Return true: int successfully sent
-        }
-
-        /*************************************/
-
-        private static bool SendString(SS.Socket mySocket, IPEndPoint ePoint, string message)
-        {
-            Int32 bufferlength = message.Count(); //Find string buffer length
-            if (!SendInt(mySocket, ePoint, bufferlength)) //Send length of string buffer, If sending buffer length fails...
-                return false; //Return false: Failed to send string buffer length
-            return SendAll(mySocket, ePoint, Encoding.ASCII.GetBytes(message)); //Try to send string buffer
-        }
-
-        /*************************************/
-
-        private static bool SendAll(SS.Socket mySocket, IPEndPoint ePoint, byte[] data)
-        {
-            int totalbytes = data.Length;
-
-            int bytessent = 0; //Holds the total bytes sent
-            while (bytessent < totalbytes) //While we still have more bytes to send
-            {
-                try
-                {
-                    int nbBytes = Math.Min(5000, totalbytes - bytessent);
-                    int RetnCheck = mySocket.SendTo(new ArraySegment<byte>(data, bytessent, nbBytes).ToArray(), ePoint); //Try to send remaining bytes
-                    bytessent += RetnCheck; //Add to total bytes sent
-                    Thread.Sleep(50);
-                }
-                catch
-                {
-                    return false;
-                }
-            }
-
-            return true; //Success!
-        }
-
-        /*************************************/
-
-        private static string WrapMesh(List<UnrealMesh> UnrealMeshes)
+        private static string Wrap(List<UnrealMesh> UnrealMeshes)
         {
 
             //Add Message Type
@@ -152,8 +99,8 @@ namespace BH.Engine.Unreal
                     json += "[" + (vertex.X * 100).ToString("0.0") + "," + (vertex.Y * -100).ToString("0.0") + "," + (vertex.Z * 100).ToString("0.0") + "],";
                     Normals.Add(new Vector());
                 }
-                json = json.Trim(',') + "], \"faces\": [";               
-                
+                json = json.Trim(',') + "], \"faces\": [";
+
                 foreach (BH.oM.Geometry.Face face in UnrealMeshes[i].Mesh.Faces)
                 {
                     //if (face.IsQuad)
@@ -181,9 +128,9 @@ namespace BH.Engine.Unreal
                 RenderMaterial meshMaterial = UnrealMeshes[i].RenderMaterial;
 
                 string materialString = "[";
-                materialString += (meshMaterial.BaseColor.R/255.0).ToString() + ", " + (meshMaterial.BaseColor.G / 255.0).ToString() + ", " + (meshMaterial.BaseColor.B / 255.0).ToString();
+                materialString += (meshMaterial.BaseColor.R / 255.0).ToString() + ", " + (meshMaterial.BaseColor.G / 255.0).ToString() + ", " + (meshMaterial.BaseColor.B / 255.0).ToString();
                 materialString += ", " + meshMaterial.Opacity.ToString() + ", " + meshMaterial.Glossiness.ToString();
-                materialString += ", " + (meshMaterial.EmissiveColor.R/255.0).ToString() + ", " + (meshMaterial.EmissiveColor.G / 255.0).ToString() + ", " + (meshMaterial.EmissiveColor.B / 255.0).ToString() + ", " + meshMaterial.Emissivity.ToString();
+                materialString += ", " + (meshMaterial.EmissiveColor.R / 255.0).ToString() + ", " + (meshMaterial.EmissiveColor.G / 255.0).ToString() + ", " + (meshMaterial.EmissiveColor.B / 255.0).ToString() + ", " + meshMaterial.Emissivity.ToString();
 
                 materialString += "]";
 
@@ -200,7 +147,7 @@ namespace BH.Engine.Unreal
 
         /*************************************/
 
-        private static string WrapSplines(List<UnrealSpline> Splines)
+        private static string Wrap(List<UnrealSpline> Splines)
         {
 
             //Add Message Type
@@ -218,7 +165,7 @@ namespace BH.Engine.Unreal
 
                 foreach (UnrealNode node in spline.Nodes)
                 {
-                    
+
                     splineString += "[" + Math.Round(node.Position.X * 100, 0) + "," + Math.Round(node.Position.Y * -100, 0) + "," + Math.Round(node.Position.Z * 100, 0) + "],";
 
                     valueString += "[";
@@ -239,14 +186,14 @@ namespace BH.Engine.Unreal
             splineString = splineString.TrimEnd(',') + "]";
             valueString = valueString.TrimEnd(',') + "]";
 
-            json += splineString + valueString ;
+            json += splineString + valueString;
 
             return json;
         }
 
         /*************************************/
 
-        private static string WrapNodes(List<UnrealNode> Nodes)
+        private static string Wrap(List<UnrealNode> Nodes)
         {
 
             //Add Message Type
@@ -282,7 +229,7 @@ namespace BH.Engine.Unreal
 
         /*************************************/
 
-        private static string WrapVRProject(List<string> messages, Project project)
+        private static string Wrap(List<string> messages, Project project)
         {
 
             string json = "[[[[[" + project.Name + "]]]],";
@@ -304,5 +251,37 @@ namespace BH.Engine.Unreal
             json = json.Trim(',') + "]";
             return json;
         }
+
+
+        private static string Serialize(IEnumerable<IBHoMObject> bhomObjects)
+        {
+            List<string> outString = new List<string>();
+
+            foreach (var o in bhomObjects)
+                outString.Add(Serialize(o));
+
+            return outString.Aggregate((i, j) => i + Environment.NewLine + j);
+        }
+
+        private static string Serialize(IBHoMObject bhomObject)
+        {
+            var outStream = new StringWriter();
+
+            // Never include CustomData, otherwise serialization error
+            var attrOverride = new XmlAttributeOverrides();
+            attrOverride.Add(typeof(BHoMObject), "CustomData", new XmlAttributes() { XmlIgnore = true });
+
+            var serializer = new XmlSerializer(bhomObject.GetType(), attrOverride);
+
+            XmlSerializerNamespaces ns = new XmlSerializerNamespaces(); ns.Add("", ""); // Removes namespace bloat
+
+            XmlWriterSettings xmlWriterSettings = new XmlWriterSettings() { OmitXmlDeclaration = true, Indent = true };
+            XmlWriter xmlWriter = XmlWriter.Create(outStream, xmlWriterSettings);
+
+            serializer.Serialize(xmlWriter, bhomObject, ns);
+
+            return outStream.ToString();
+        }
+
     }
 }
