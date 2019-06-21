@@ -65,8 +65,8 @@ namespace BH.Adapter.Unreal
             {
                 if (objects.Count() > 1)
                 {
-                    BH.Engine.Reflection.Compute.RecordError("Please push only one Unreal Project Settings at a time.");
-                    return false;
+                    //BH.Engine.Reflection.Compute.RecordError("Please push only one Unreal Project Settings at a time.");
+                    //return false;
                 }
 
                 success = Create(objects.First() as UnrealProjectSettings);

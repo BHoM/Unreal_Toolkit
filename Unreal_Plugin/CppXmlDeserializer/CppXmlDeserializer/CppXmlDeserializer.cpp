@@ -7,7 +7,8 @@
 
 // http://www.gerald-fahrnholz.eu/sw/DocGenerated/HowToUse/html/group___grp_pugi_xml.html
 
-int main()
+
+bool readProjectSettings() 
 {
 	pugi::xml_document doc;
 
@@ -34,10 +35,19 @@ int main()
 	std::cout << "\n ResultMax " << doc.child("UnrealProjectSettings").child("ResultMax").text().as_string();
 	std::cout << "\n ResultMin " << doc.child("UnrealProjectSettings").child("ResultMin").text().as_string();
 
+	return true;
+}
+
+bool readMeshes() 
+{
 	///// Meshes
-	pathtext = "C:\\temp\\unrealMeshes.txt";
-	path = pathtext.c_str();
-	result = doc.load_file(path);
+
+	pugi::xml_document doc;
+
+	std::string pathtext = "C:\\temp\\unrealMeshes.txt";
+	const char *path = pathtext.c_str();
+	pugi::xml_parse_result result = doc.load_file(path);
+
 
 	if (!result)
 	{
@@ -45,10 +55,30 @@ int main()
 			<< ", character pos= " << result.offset;
 	}
 
-	//doc.selec.children("UnrealMesh").
-	
 	// TODO: Recreate the behaviour of the function JsonToMesh in the C++ UnrealToolkitProject plugin solution
 
-	return 0;
+	//std::cout << "\n Meshes " << doc.child("UnrealMesh").text().as_string();
+	auto nodes = doc.select_nodes("UnrealMesh/Mesh/Vertices/Point");
+	std::cout << nodes.size();
+	for (int i = 0; i < nodes.size(); i++)
+	{
+		std::cout << "\n X: " << nodes[i].node().select_node("X").node().text().as_string();
+
+	}
+
+	return true;
 }
 
+
+
+
+
+///----------------------
+/// MAIN
+///----------------------
+int main()
+{
+	//readProjectSettings();
+
+	readMeshes();
+}

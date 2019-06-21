@@ -172,13 +172,16 @@ void UBHoMFunctionLibrary::JsonToFloats(FString json, TArray<float>& items)
 		items.Add(FCString::Atof(*stringArray[i]));
 }
 
-void UBHoMFunctionLibrary::BHoMProjectSettings(FString json, FString& SaveIndex, FString& Scale, FString& Unit, FString& ResultMax, FString& ResultMin)
+void UBHoMFunctionLibrary::BHoMProjectSettings(FString json, FString& Name, FString& SaveIndex, FString& Scale, FString& Unit, FString& ResultMax, FString& ResultMin)
 {
 	pugi::xml_document doc;
 
 	pugi::xml_parse_result result = doc.load_string(TCHAR_TO_ANSI(*json));
 
-	auto text = doc.child("UnrealProjectSettings").child("SaveIndex").text().as_string();
+	auto text = doc.child("UnrealProjectSettings").child("Name").text().as_string();
+	Name = ANSI_TO_TCHAR(text);
+
+	text = doc.child("UnrealProjectSettings").child("SaveIndex").text().as_string();
 	SaveIndex = ANSI_TO_TCHAR(text);
 
 	text = doc.child("UnrealProjectSettings").child("Scale").text().as_string();
@@ -188,10 +191,38 @@ void UBHoMFunctionLibrary::BHoMProjectSettings(FString json, FString& SaveIndex,
 	Unit = ANSI_TO_TCHAR(text);
 
 	text = doc.child("UnrealProjectSettings").child("ResultMax").text().as_string();
-	Unit = ANSI_TO_TCHAR(text);
+	ResultMax = ANSI_TO_TCHAR(text);
 
 	text = doc.child("UnrealProjectSettings").child("ResultMin").text().as_string();
-	Unit = ANSI_TO_TCHAR(text);
+	ResultMin = ANSI_TO_TCHAR(text);
+}
+
+void UBHoMFunctionLibrary::BHoMMesh(FString json, TArray<FVector>& vertices, TArray<int>& triangles)
+{
+	pugi::xml_document doc;
+
+	pugi::xml_parse_result result = doc.load_string(TCHAR_TO_ANSI(*json));
+
+	auto nodes = doc.select_nodes("UnrealMesh/Mesh/Vertices/Point");
+
+	for (int i = 0; i < nodes.size(); i++)
+	{
+		auto x = FCString::Atof(ANSI_TO_TCHAR(nodes[i].node().select_node("X").node().text().as_string()));
+		auto y = FCString::Atof(ANSI_TO_TCHAR(nodes[i].node().select_node("Y").node().text().as_string()));
+		auto z = FCString::Atof(ANSI_TO_TCHAR(nodes[i].node().select_node("Z").node().text().as_string()));
+
+		vertices.Add(FVector(x, y, z));
+	}
+
+	nodes = doc.select_nodes("UnrealMesh/Mesh/Faces/Face");
+
+	for (int i = 0; i < nodes.size(); i++)
+	{
+		auto f = FCString::Atof(ANSI_TO_TCHAR(nodes[i].node().select_node("A").node().text().as_string()));
+
+		triangles.Add(f);
+	}
+
 }
 
 //void UBHoMFunctionLibrary::BHoMProjectSettings1_works(FString json, TArray<FString>& SaveIndex)
