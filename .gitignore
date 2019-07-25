@@ -58,9 +58,9 @@ Intermediate/
 ###########################
 *.suo
 *.user
-.vs/
-.VC.db
-.VC.opendb
+*.vs/
+*.VC.db
+*.VC.opendb
 Unreal_Plugin/CppXmlDeserializer/CppXmlDeserializer.VC.db
 Unreal_Plugin/CppXmlDeserializer/CppXmlDeserializer.VC.VC.opendb
 Unreal_Plugin/UnrealToolkitProject/UnrealToolkitProject.VC.db
