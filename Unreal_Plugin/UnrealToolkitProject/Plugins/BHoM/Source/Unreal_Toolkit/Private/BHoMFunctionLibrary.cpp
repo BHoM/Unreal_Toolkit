@@ -172,6 +172,7 @@ void UBHoMFunctionLibrary::JsonToFloats(FString json, TArray<float>& items)
 		items.Add(FCString::Atof(*stringArray[i]));
 }
 
+// New methods
 void UBHoMFunctionLibrary::BHoMProjectSettings(FString json, FString& Name, FString& SaveIndex, FString& Scale, FString& Unit, FString& ResultMax, FString& ResultMin)
 {
 	pugi::xml_document doc;

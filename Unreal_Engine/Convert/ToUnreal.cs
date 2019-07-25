@@ -271,6 +271,9 @@ namespace BH.Engine.Unreal
             var attrOverride = new XmlAttributeOverrides();
             attrOverride.Add(typeof(BHoMObject), "CustomData", new XmlAttributes() { XmlIgnore = true });
 
+            // Never include CustomData, otherwise serialization error
+            attrOverride.Add(typeof(BHoMObject), "Fragments", new XmlAttributes() { XmlIgnore = true });
+
             var serializer = new XmlSerializer(bhomObject.GetType(), attrOverride);
 
             XmlSerializerNamespaces ns = new XmlSerializerNamespaces(); ns.Add("", ""); // Removes namespace bloat

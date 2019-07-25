@@ -38,16 +38,16 @@ namespace BH.Engine.Graphics
         /**** Public Methods                            ****/
         /***************************************************/
 
-        public static RenderMaterial RenderMaterial(Color baseColor = new Color(), double opacity = 1, double glossiness = 0, Color emissiveColor = new Color(), double emissivity = 0)
+        public static RenderMaterial RenderMaterial(Color baseColor, double opacity, double glossiness, Color emissiveColor, double emissivity)
         {
 
             return new RenderMaterial
             {
-                BaseColor = baseColor,
-                Opacity = opacity,
-                Glossiness = glossiness,
-                EmissiveColor = emissiveColor,
-                Emissivity = emissivity
+                BaseColor = baseColor == null ? Color.Magenta : baseColor,
+                Opacity = opacity == null ? 0 : opacity,
+                Glossiness = glossiness == null ? 0 : glossiness,
+                EmissiveColor = emissiveColor == null ? Color.Magenta : baseColor,
+                Emissivity = emissivity == null ? 0 : emissivity,
             };
         }
 

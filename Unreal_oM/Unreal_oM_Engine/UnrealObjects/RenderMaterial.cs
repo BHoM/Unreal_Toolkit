@@ -10,10 +10,10 @@ namespace BH.oM.Graphics.MaterialFragments
 {
     public class RenderMaterial : BHoMObject 
     {
-        public Color BaseColor { get; set; } = new Color();
+        public Color BaseColor { get; set; } = Color.Magenta;
         public double Opacity { get; set; } = 1;
         public double Glossiness { get; set; } = 0;
-        public Color EmissiveColor { get; set; } = new Color();
+        public Color EmissiveColor { get; set; } = Color.Magenta;
         public double Emissivity { get; set; } = 0;
     }
 
