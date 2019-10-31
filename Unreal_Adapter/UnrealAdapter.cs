@@ -44,8 +44,7 @@ namespace BH.Adapter.Unreal
         {
             AdapterId = BH.Engine.Unreal.Convert.AdapterId;   //Set the "AdapterId" to "SoftwareName_id". Generally stored as a constant string in the convert class in the SoftwareName_Engine
 
-            Config.SeparateProperties = true;   //Set to true to push dependant properties of objects before the main objects are being pushed. Example: push nodes before pushing bars
-            Config.MergeWithComparer = false;    //Set to true to use EqualityComparers to merge objects. Example: merge nodes in the same location
+            Config.HandleDependencies = true;   //Set to true to push dependant properties of objects before the main objects are being pushed. Example: push nodes before pushing bars
             Config.ProcessInMemory = true;     //Set to false to to update objects in the toolkit during the push
             Config.CloneBeforePush = false;      //Set to true to clone the objects before they are being pushed through the software. Required if any modifications at all, as adding a software ID is done to the objects
             Config.UseAdapterId = false;         //Tag objects with a software specific id in the CustomData. Requires the NextIndex method to be overridden and implemented
