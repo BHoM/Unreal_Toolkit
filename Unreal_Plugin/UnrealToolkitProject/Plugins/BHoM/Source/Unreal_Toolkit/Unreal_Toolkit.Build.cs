@@ -1,6 +1,6 @@
 /*
  * This file is part of the Buildings and Habitats object Model (BHoM)
- * Copyright (c) 2015 - 2019, the respective contributors. All rights reserved.
+ * Copyright (c) 2015 - 2020, the respective contributors. All rights reserved.
  *
  * Each contributor holds copyright over their respective contributions.
  * The project versioning (Git) records all such contribution source information.
@@ -43,3 +43,4 @@ public class Unreal_Toolkit : ModuleRules
         // To include OnlineSubsystemSteam, add it to the plugins section in your uproject file with the Enabled attribute set to true
     }
 }
+
