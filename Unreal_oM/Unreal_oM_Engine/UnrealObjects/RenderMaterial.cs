@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Drawing;
 using BH.oM.Base;
 
-namespace BH.oM.Graphics.MaterialFragments
+namespace BH.oM.External.Unreal
 {
     public class RenderMaterial : BHoMObject 
     {

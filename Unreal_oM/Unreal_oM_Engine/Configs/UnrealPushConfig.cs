@@ -1,6 +1,6 @@
 /*
  * This file is part of the Buildings and Habitats object Model (BHoM)
- * Copyright (c) 2015 - 2019, the respective contributors. All rights reserved.
+ * Copyright (c) 2015 - 2020, the respective contributors. All rights reserved.
  *
  * Each contributor holds copyright over their respective contributions.
  * The project versioning (Git) records all such contribution source information.
@@ -20,18 +20,9 @@
  * along with this code. If not, see <https://www.gnu.org/licenses/lgpl-3.0.html>.      
  */
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BH.oM.Base;
-using BH.oM.Geometry;
-using BH.oM.Graphics.MaterialFragments;
-using BH.oM;
 using BH.oM.Adapter;
 
-namespace BH.oM.VirtualReality
+namespace BH.oM.External.Unreal
 {
     public class UnrealPushConfig : ActionConfig
     {
@@ -41,10 +32,8 @@ namespace BH.oM.VirtualReality
 
         public RenderMaterial RenderMaterial { get; set; } = new RenderMaterial();
 
-        public Mesh Mesh { get; set; } = new Mesh();
+        public UnrealMesh Mesh { get; set; } = new UnrealMesh();
 
         /***************************************************/
-
-
     }
 }

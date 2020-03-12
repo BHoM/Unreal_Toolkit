@@ -1,6 +1,6 @@
 /*
  * This file is part of the Buildings and Habitats object Model (BHoM)
- * Copyright (c) 2015 - 2019, the respective contributors. All rights reserved.
+ * Copyright (c) 2015 - 2020, the respective contributors. All rights reserved.
  *
  * Each contributor holds copyright over their respective contributions.
  * The project versioning (Git) records all such contribution source information.
@@ -29,9 +29,7 @@ using System.Net;
 using SS = System.Net.Sockets;
 using System.Threading;
 using BH.oM.Base;
-using BH.oM.VirtualReality;
-
-
+using BH.oM.External.Unreal;
 
 namespace BH.Adapter.Unreal
 {
@@ -93,7 +91,7 @@ namespace BH.Adapter.Unreal
 
         protected bool Create(Project project)
         {
-            string data = BH.Engine.Unreal.Convert.ToUnreal(project);
+            string data = Convert.ToUnreal(project);
 
             return SendData(m_address, m_port, data);
 
@@ -102,7 +100,7 @@ namespace BH.Adapter.Unreal
 
         protected bool Create(UnrealProjectSettings settings)
         {
-            string data = BH.Engine.Unreal.Convert.ToUnreal(settings);
+            string data = Convert.ToUnreal(settings);
 
             using (System.IO.TextWriter gna = new System.IO.StreamWriter("C:\\temp\\unrealProjectSettings.txt"))
                 gna.Write(data);
@@ -112,14 +110,14 @@ namespace BH.Adapter.Unreal
 
         protected bool CreateCollection(IEnumerable<UnrealSpline> unrealSplines)
         {
-            string data = BH.Engine.Unreal.Convert.ToUnreal(unrealSplines);
+            string data = Convert.ToUnreal(unrealSplines);
 
             return SendData(m_address, m_port, data);
         }
 
         protected bool CreateCollection(IEnumerable<UnrealMesh> unrealMeshes)
         {
-            string data = BH.Engine.Unreal.Convert.ToUnreal(unrealMeshes);
+            string data = Convert.ToUnreal(unrealMeshes);
 
             using (System.IO.TextWriter gna = new System.IO.StreamWriter("C:\\temp\\unrealMeshes.txt"))
                 gna.Write(data);

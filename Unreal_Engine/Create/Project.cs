@@ -1,6 +1,6 @@
 /*
  * This file is part of the Buildings and Habitats object Model (BHoM)
- * Copyright (c) 2015 - 2019, the respective contributors. All rights reserved.
+ * Copyright (c) 2015 - 2020, the respective contributors. All rights reserved.
  *
  * Each contributor holds copyright over their respective contributions.
  * The project versioning (Git) records all such contribution source information.
@@ -25,10 +25,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BH.oM.VirtualReality;
-using BH.oM.Acoustic;
+using BH.oM.External.Unreal;
 
-namespace BH.Engine.VirtualReality.Unreal
+namespace BH.Engine.External.Unreal
 {
     public static partial class Create
     {
