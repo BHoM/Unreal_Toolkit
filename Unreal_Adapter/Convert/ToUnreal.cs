@@ -35,7 +35,6 @@ using BH.oM.Base;
 using BH.oM.VirtualReality;
 using BH.oM.Geometry;
 using BH.Engine.Geometry;
-using BH.oM.Acoustic;
 using BH.oM.Graphics.MaterialFragments;
 using System.Drawing;
 

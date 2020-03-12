@@ -25,21 +25,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BH.oM.Base;
+using BH.oM.Geometry;
+using BH.oM.Graphics.MaterialFragments;
+using BH.oM;
+using BH.oM.Adapter;
 
-namespace BH.Adapter.Unreal
+namespace BH.oM.VirtualReality
 {
-    public partial class UnrealAdapter
+    public class UnrealPushConfig : ActionConfig
     {
         /***************************************************/
-        /**** Adapter overload method                   ****/
+        /**** Properties                                ****/
         /***************************************************/
 
-        protected override int Delete(Type type, IEnumerable<object> ids)
-        {
-            //Insert code here to enable deletion of specific types of objects with specific ids
-            throw new NotImplementedException();
-        }
+        public RenderMaterial RenderMaterial { get; set; } = new RenderMaterial();
+
+        public Mesh Mesh { get; set; } = new Mesh();
 
         /***************************************************/
+
+
     }
 }

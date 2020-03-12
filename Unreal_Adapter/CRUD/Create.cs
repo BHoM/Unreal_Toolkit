@@ -41,7 +41,7 @@ namespace BH.Adapter.Unreal
         /**** Adapter overload method                   ****/
         /***************************************************/
 
-        protected override bool Create<T>(IEnumerable<T> objects)
+        protected bool Create(IEnumerable<IBHoMObject> objects)
         {
             bool success = true;
 
@@ -50,7 +50,7 @@ namespace BH.Adapter.Unreal
 
             if (objects.First() is Project)
             {
-                BH.Engine.Reflection.Compute.RecordWarning("Project is being superseded. Please consider pushing UnrealProject instead.");
+                BH.Engine.Reflection.Compute.RecordWarning("`Project` type is being superseded. Please consider pushing `UnrealProject` instead.");
 
                 if (objects.Count() > 1)
                 {

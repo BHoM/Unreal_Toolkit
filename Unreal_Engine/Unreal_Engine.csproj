@@ -59,9 +59,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Convert\AdapterId.cs" />
-    <Compile Include="Convert\ToBHoM.cs" />
-    <Compile Include="Convert\ToUnreal.cs" />
     <Compile Include="Create\UnrealNode.cs" />
     <Compile Include="Create\RenderMaterial.cs" />
     <Compile Include="Create\UnrealProjectSettings.cs" />

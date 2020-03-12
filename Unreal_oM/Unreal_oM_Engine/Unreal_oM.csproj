@@ -33,6 +33,9 @@
     <Reference Include="Acoustic_oM">
       <HintPath>..\..\..\BHoM\Build\Acoustic_oM.dll</HintPath>
     </Reference>
+    <Reference Include="Adapter_oM">
+      <HintPath>..\..\..\BHoM_Adapter\Build\Adapter_oM.dll</HintPath>
+    </Reference>
     <Reference Include="BHoM">
       <HintPath>..\..\..\BHoM\Build\BHoM.dll</HintPath>
       <Private>False</Private>
@@ -53,6 +56,7 @@
   <ItemGroup>
     <Compile Include="UnrealObjects\Project.cs" />
     <Compile Include="UnrealObjects\RenderMaterial.cs" />
+    <Compile Include="Configs\UnrealPushConfig.cs" />
     <Compile Include="UnrealObjects\UnrealNode.cs" />
     <Compile Include="UnrealObjects\UnrealProjectSettings.cs" />
     <Compile Include="UnrealObjects\UnrealSpline.cs" />
